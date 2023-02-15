@@ -26,11 +26,11 @@ Steps on how to use:
 
 **Common erros include:**
     1. Windows users don't have permission to run scripts in instructions 3.2 which returns an error. You can follow this solution:
-        A. Press the [windows] button and then type PowerShell.
-        B. Run as Adiministrator
-        C. Copy and Paste the following command and hit [Enter]
-        D. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
-        E. Type Y and hit [Enter]
-        F. Rerun the command and type A hit [Enter]
-        G. Close the powershell and try again
+             A. Press the [windows] button and then type PowerShell.
+             B. Run as Adiministrator
+             C. Copy and Paste the following command and hit [Enter]
+             D. Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+             E. Type Y and hit [Enter]
+             F. Rerun the command and type A hit [Enter]
+             G. Close the powershell and try again
     2. the virtual environment does not turn on because you may not have done 3.1 correctly, often because mac/windows differs in commands.
