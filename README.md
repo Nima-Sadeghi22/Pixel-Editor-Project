@@ -24,7 +24,8 @@ Steps on how to use:
 
 7. both should now be up and running
 
-**Common erros include:**
+**Common errors include:**
+
     1. Windows users don't have permission to run scripts in instructions 3.2 which returns an error. You can follow this solution:
              A. Press the [windows] button and then type PowerShell.
              B. Run as Adiministrator
