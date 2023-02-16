@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import Home from './homeScreen.js'
 import PixelEditor from './pixelEditorScreen'
 import Forum from './forumScreen'
