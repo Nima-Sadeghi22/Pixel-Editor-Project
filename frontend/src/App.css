@@ -83,3 +83,45 @@
   width: 100%;
   height: 200px;
 }
+.sigPadContainer hr{
+  margin-bottom: unset;
+  background-color: gainsboro;
+}
+.sigPadContainer button {
+  border: none;
+  margin-left: auto;
+  color: rgb(78, 75, 75);
+  padding: 0;
+  display: block;
+  margin-top: 5px;
+}
+.sigPadContainer button:hover {
+  background-color: unset;
+  color: black;
+}
+.sigPad__penColors{
+  background-color: rgb(238, 235, 235);
+  margin-bottom: 10px;
+}                                                                                                                  
+.sigPad__penColors p{
+  display: inline-block; 
+  margin-right: 5px;
+}
+.sigPad__penColors span{
+  padding: 0px 9px;
+  border-radius: 100%;
+  margin-right: 5px;
+}
+.modal__bottom .create{
+  margin-left: 10px;
+  background-color: rgb(126, 119, 119);
+  color: white;
+}
+.signature {
+  width: 200px;
+  height: 70px;
+  margin-top: 20px;
+  box-shadow: 0 0 4px 2px gainsboro;
+  padding: 10px;
+  object-fit: contain;
+}
