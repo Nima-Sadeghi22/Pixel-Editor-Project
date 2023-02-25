@@ -1,28 +1,19 @@
 import React, { useState, useRef,Fragment } from "react";
 import SignatureCanvas from 'react-signature-canvas'
 
-function SignaturePad(){
+function SignaturePad(props){
 
-const [openModel, setOpenModal] = useState(false);
-const sigCanvas = useRef();
-const [penColor, setPenColor] = useState("black");
-const colors = ["black", "green", "red", "purple", "yellow", "blue", "pink", "orange"]
-const [imageURL, setImageURL] = useState(null);
+  const { setSignature } = props;
 
+  const sigCanvas = useRef();
+  const [penColor, setPenColor] = useState("black");
+  const colors = ["black", "green", "red", "purple", "yellow", "blue", "pink", "orange"]
 
-const create = () => {
-  const URL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-  setImageURL(URL);
-  setOpenModal(false);
-};
-  // {
-  //   imageUrl && (
-  //     <>
-  //       <img src={imageUrl} alt="signature" className="signature" />
-  //     </>
-  //   )
-  // }
-
+  const create = () => {
+    const URL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    setSignature(URL);
+    // setOpenModal(false);
+  };
 
   //Pad to Draw Signature
   return (
@@ -43,13 +34,13 @@ const create = () => {
 
       <div className="sigPadContainer">
         <SignatureCanvas penColor={penColor}
-        canvasProps={{ className: "sigCanvas" }} 
-        ref={sigCanvas}
+          canvasProps={{ className: "sigCanvas" }} 
+          ref={sigCanvas}
         />
         <hr/>
         <button onClick={() => sigCanvas.current.clear()}>Clear</button>
         <button className="create" onClick={create}>
-              Create
+          Create
         </button>
       </div>
     </Fragment>
