@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import Home from './homeScreen.js'
 import PixelEditor from './pixelEditorScreen'
 import Forum from './forumScreen'
@@ -26,7 +26,7 @@ function App() {
       return (
         <div className="App">
           <button onClick={() => setScreenState(0)}>Return to Home</button>
-          <PixelEditor></PixelEditor>
+          <PixelEditor x={10} y={10} gridWidth={10} gridHeight={10} pixelWidth={12} defaultColor="#FFFF00"></PixelEditor>
         </div>
       );
       break;
