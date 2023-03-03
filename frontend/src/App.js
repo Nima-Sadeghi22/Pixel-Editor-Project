@@ -5,7 +5,7 @@ import SignaturePad from './SignaturePad';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
-  const [openModel, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [signature, setSignature] = useState(null);
 
   useEffect(() => {
@@ -30,12 +30,12 @@ function App() {
         </div>
       </header>
 
-      {openModel && (
+      {openModal && (
         <div className="modalContainer">
           <div className="modal">
-            <SignaturePad setSignature={setSignature} />
+            <SignaturePad setSignature={setSignature} setOpenModal={setOpenModal} />
             <div className="modal__bottom">
-              <button onClick={() => setOpenModal(false)}>Cancel</button>
+              <button onClick={() => setOpenModal(false)}>Cancel</button> 
             </div>
 
           </div>

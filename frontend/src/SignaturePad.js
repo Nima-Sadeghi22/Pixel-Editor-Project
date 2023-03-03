@@ -3,8 +3,7 @@ import SignatureCanvas from 'react-signature-canvas'
 
 function SignaturePad(props){
 
-  const { setSignature } = props;
-
+  const { setSignature, setOpenModal } = props;
   const sigCanvas = useRef();
   const [penColor, setPenColor] = useState("black");
   const colors = ["black", "green", "red", "purple", "yellow", "blue", "pink", "orange"]
@@ -12,7 +11,7 @@ function SignaturePad(props){
   const create = () => {
     const URL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
     setSignature(URL);
-    // setOpenModal(false);
+    setOpenModal(false);
   };
 
   //Pad to Draw Signature
@@ -39,9 +38,8 @@ function SignaturePad(props){
         />
         <hr/>
         <button onClick={() => sigCanvas.current.clear()}>Clear</button>
-        <button className="create" onClick={create}>
-          Create
-        </button>
+        <button className="create" onClick={create}>Create</button>
+        
       </div>
     </Fragment>
   );
