@@ -26,7 +26,8 @@ function App() {
       return (
         <div className="App">
           <button onClick={() => setScreenState(0)}>Return to Home</button>
-          <PixelEditor x={10} y={10} gridWidth={10} gridHeight={10} pixelWidth={12} defaultColor="#FFFF00"></PixelEditor>
+          <PixelEditor x={10} y={10} gridWidth={10} gridHeight={10} pixelWidth={12} defaultColor="#FFFF00"
+          selectedColor="#63C5DA"></PixelEditor>
         </div>
       );
       break;
