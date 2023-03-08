@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SearchBar from './Searchbar';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -14,10 +14,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-
-       If the backend is working, there should be a bunch of numbers here (not 0):
-
-        <p> {currentTime}.</p>
+      <SearchBar />
       </header>
     </div>
   );
