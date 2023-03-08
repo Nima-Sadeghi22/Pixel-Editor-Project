@@ -15,6 +15,8 @@ import "./pixelStyles.css"
 
     var gridColors = [];
 
+    var drawMode = "draw";
+
 function PixelEditor(props){
 
     x=props.x;
@@ -69,6 +71,15 @@ function PixelEditor(props){
     return (
         <div>
             <canvas ref={canvasRef} {...props}/>
+            <div>
+                <button class = "selection_buttons" onClick={() => drawMode = "draw"}>Draw</button>
+                <button class = "selection_buttons" onClick={() => drawMode = "fill"}>Fill</button>
+            </div>
+            <div>
+                <input id="color_input" class="text_input"></input>
+                <button onClick={() => selectedColor=document.getElementById("color_input").value}class="color_selection_buttons">
+                Choose Color (HEX)</button>
+            </div>
         </div>
     );
 }
@@ -99,6 +110,22 @@ function drawGrid(ctx, init){
     ctx.closePath();
 }
 
+function fill(i, j, oldColor){
+    gridColors[i][j] = selectedColor;
+	if(i>0&&gridColors[i-1][j]==oldColor) {
+		fill(i-1, j, oldColor);
+	}
+	if(i<gridColors.length-1&&gridColors[i+1][j]==oldColor) {
+		fill(i+1, j, oldColor);
+	}
+	if(j>0&&gridColors[i][j-1]==oldColor) {
+		fill(i, j-1, oldColor);
+	}
+	if(j<gridColors[0].length-1&&gridColors[i][j+1]==oldColor) {
+		fill(i, j+1, oldColor);
+	}
+}
+
 function onClick(canvas, event) {
     const rect = canvas.getBoundingClientRect()
     const mousex = event.clientX - rect.left
@@ -109,7 +136,13 @@ function onClick(canvas, event) {
     if(xindex<0||yindex<0||xindex>gridWidth-1||yindex>gridHeight-1){
         return
     }
-    gridColors[xindex][yindex] = selectedColor;
+    if(drawMode=="draw"){
+        gridColors[xindex][yindex] = selectedColor;
+    }else if(drawMode=="fill"){
+        if(selectedColor!=gridColors[xindex][yindex]){
+            fill(xindex, yindex, gridColors[xindex][yindex])
+        }
+    }
     drawGrid(canvas.getContext('2d'), false);
 }
 
