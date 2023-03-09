@@ -72,8 +72,18 @@ function PixelEditor(props){
         <div>
             <canvas ref={canvasRef} {...props}/>
             <div>
-                <button class = "selection_buttons" onClick={() => drawMode = "draw"}>Draw</button>
-                <button class = "selection_buttons" onClick={() => drawMode = "fill"}>Fill</button>
+                <button class = "selection_buttons" onClick={() => drawMode = "draw"}>
+                    <img src={require("./images/pencilTool.png")}/>
+                </button>
+                <button class = "selection_buttons" onClick={() => drawMode = "fill"}>
+                    <img src={require("./images/bucketTool.png")}/>
+                </button>
+                <button class = "selection_buttons" onClick={() => drawMode = "select"}>
+                    <img src={require("./images/dropperTool.png")}/>
+                </button>
+                <button class = "selection_buttons" onClick={() => drawMode = "erase"}>
+                    <img src={require("./images/eraserTool.png")}/>
+                </button>
             </div>
             <div>
                 <input id="color_input" class="text_input"></input>
@@ -142,6 +152,10 @@ function onClick(canvas, event) {
         if(selectedColor!=gridColors[xindex][yindex]){
             fill(xindex, yindex, gridColors[xindex][yindex])
         }
+    }else if(drawMode=="select"){
+        selectedColor = gridColors[xindex][yindex];
+    }else if(drawMode=="erase"){
+        gridColors[xindex][yindex] = "#FFFFFF"
     }
     drawGrid(canvas.getContext('2d'), false);
 }
