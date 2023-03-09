@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import SearchBar from './Searchbar';
+import Forum from './forum';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/').then(res => res.json()).then(data => {
+    fetch('/forum/post').then(res => res.json()).then(data => {
       setCurrentTime(data.time);
     });
   }, []);
@@ -14,7 +15,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <SearchBar />
+        <SearchBar />
+      <Forum />
       </header>
     </div>
   );

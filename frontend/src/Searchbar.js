@@ -12,7 +12,7 @@ function SearchBar() {
       setPosts(data);
     }
     fetchPosts();
-  }, []);
+  }, [posts]);
 
   const filteredPosts = posts.filter(post => {
     return post.title.toLowerCase().includes(searchTerm.toLowerCase());
