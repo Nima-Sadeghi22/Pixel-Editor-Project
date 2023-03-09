@@ -7,7 +7,7 @@ function SearchBar() {
 
   useEffect(() => {
     async function fetchPosts() {
-      const response = await fetch('/forum/post');
+      const response = await fetch('http://localhost:5000/forum/post');
       const data = await response.json();
       setPosts(data);
     }
@@ -23,7 +23,10 @@ function SearchBar() {
       <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="search-input"/>
       <ul>
         {filteredPosts.map(post => (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id}>
+            <h3>Title: {post.title}</h3>
+            <p>Body:{post.body}</p>
+            </li>
         ))}
       </ul>
     </div>
