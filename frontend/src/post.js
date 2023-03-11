@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Reply from './reply' 
 //import Forum from './forum'
 
 function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bodyProp }) {
     const [title, setTitle] = useState(titleProp);
     const [body, setBody] = useState(bodyProp);
-    console.log('editing post id:', editingPostId, titleProp, bodyProp,title,body)
+    //console.log('editing post id:', editingPostId, titleProp, bodyProp,title,body)
     useEffect(()=>{
         setTitle(titleProp)
         setBody(bodyProp)
     },[editingPostId])
-    // const handleEdit = () => {
-    //     // If editing a post, fetch the current title and body from the backend
-    //     if (editingPostId !== null) {
-    //         fetch(`http://localhost:5000/forum/post/${editingPostId}`)
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 setTitle(data.title);
-    //                 setBody(data.body);
-    //             })
-    //             .catch(error => {
-    //                 console.error(error);
-    //             });
-    //     }
-    // }
+
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         if (editingPostId !== null) {

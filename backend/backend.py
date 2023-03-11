@@ -23,6 +23,7 @@ def handle_post():
         new_post= {
             'title': data['title'],
             'body': data['body'],
+            #'replies':daa
             'timestamp':datetime.now().strftime("%m/%d/%Y %H:%M:%S")      }
         posts.append(new_post)
         next_id += 1
@@ -36,6 +37,7 @@ def create_post():
         'title': data['title'],
         'body': data['body'],
         'id': len(posts)+1,
+        'replies':[],
         'timestamp': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     }
     posts.append(new_post)
@@ -53,6 +55,21 @@ def update_post(id):
             return jsonify({'post':post})
     return jsonify({'error':'Post not found'}), 404
 
+@app.route('/forum/posts/<int:id>/replies', methods=['POST'])
+def create_reply(id):
+    data = request.get_json()
+    for post in posts:
+        if post['id'] == id:
+            reply = {
+                'id': len(post['replies']) + 1,
+                'body': data['body'],
+                'timestamp': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+            }
+            post['replies'].append(reply)
+            return jsonify({'reply': reply})
+    return jsonify({'error': 'Post not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
