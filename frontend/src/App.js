@@ -1,53 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Home from './homeScreen.js'
-import PixelEditor from './pixelEditorScreen'
-import Forum from './forumScreen'
 
+
+import { BrowserRouter, Route, Routes, Link, Navigate, Redirect } from 'react-router-dom'
+import Login from './components/Login'
+import Profile from './components/Profile'
+import Header from './components/Header'
+import useToken from './components/useToken'
+import Home from './components/Home'
+import Navbar from './components/Navbar';
+import './App.css'
 
 function App() {
-  const [currentTime, setCurrentTime] = useState(0);
-  const [screenState, setScreenState] = useState(0);
-  /*
-    0 | Home
-    1 | Pixel Editor
-    2 | Forum
-  */
+  const { token, removeToken, setToken } = useToken();
 
-    useEffect(() => {
-      fetch('http://127.0.0.1:5000/').then(res => res.json()).then(data => {
-        setCurrentTime(data.time);
-      });
-    }, []);
-
-  switch(screenState){
-    case 1:
-      return (
-        <div className="App">
-          <button onClick={() => setScreenState(0)}>Return to Home</button>
-          <PixelEditor x={10} y={10} gridWidth={10} gridHeight={10} pixelWidth={12} defaultColor="#FFFF00"
-          selectedColor="#63C5DA"></PixelEditor>
-        </div>
-      );
-      break;
-    case 2:
-      return (
-        <div className="App">
-          <button onClick={() => setScreenState(0)}>Return to Home</button>
-          <Forum></Forum>
-        </div>
-      );
-      break;
-    default:
-      return (
-        <div className="App">
-          <button onClick={() => setScreenState(1)}>Pixel Editor</button>
-          <button onClick={() => setScreenState(2)}>Forum</button>
-          <Home currentTime={currentTime}></Home>
-        </div>
-      );
-      break;
-  }
+  return (
+    <BrowserRouter>
+      <div className="App">
+        
+        {!token && token!=="" &&token!== undefined?  
+        <Login setToken={setToken} />
+        :(
+          
+          <>
+            <Header token={removeToken}/>
+            <Navbar>
+            </Navbar>
+            <Routes>
+              <Route exact path="http://127.0.0.1:5000/profile" element={<Profile token={token} setToken={setToken}/>}></Route>
+              <Route exact path = "/profile" element = {<Profile></Profile>}></Route>
+              
+            </Routes>
+          
+            
+          
+            
+            
+          
+          </>
+        )}
+      </div>
+      
+    </BrowserRouter>
+  );
 }
+
 export default App;
+
