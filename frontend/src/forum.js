@@ -11,18 +11,6 @@ function Forum() {
         fetch('http://localhost:5000/forum/post')
             .then(response => response.json())
             .then(data => {
-                // const postsWithReplies = data.map(post => ({ ...post, 
-
-                //     //replies: [1,2,'44,'],
-                //     replies: [] }));
-
-                // const postsWithReplies = data.map(post => {
-                //     post.replies=[]
-                //     return post
-
-                // }
-
-                //);
                 setPosts(data);
                 console.log('logging data here ', data)
                 setPosts(data)
@@ -75,8 +63,25 @@ function Forum() {
             setPosts(updatedPosts);
         }
     };
-    // map funtion works on array only
-    // 
+    //delete function
+    const handleDeletePost = (postId) => {
+        fetch(`http://localhost:5000/forum/post/${postId}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+            // Remove the deleted post from the state
+            const updatedPosts = posts.filter(post => post.id !== postId);
+            setPosts(updatedPosts);
+          } else {
+            throw new Error('Failed to delete post.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }; 
+    
 
     return (
         <div>
@@ -87,6 +92,7 @@ function Forum() {
                         <h3>Title: {post.title}</h3>
                         <p>Body:{post.body}</p>
                         <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button>
+                        <button onClick={() => handleDeletePost(post.id)}>Delete</button>
                         <p>{(post.replies.length)}</p>
                         <ul>
                             
