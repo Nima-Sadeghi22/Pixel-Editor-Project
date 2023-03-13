@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Post from './post'
 import Reply from './reply'
+import './buttonLike.css'
 function Forum() {
     const [selectedTitle, setSelectedTitle] = useState('')
     const [selectedBody, setSelectedBody] = useState('')
     const [posts, setPosts] = useState([]);
     const [editingPostId, setEditingPostId] = useState(null);
+    const [votes, setVotes] = useState({});
+    const [votesClicked, setVotesClicked] = useState({});
+
     useEffect(() => {
+        //to get the votes from the backend
+        fetch('http://localhost:5000/forum/posts/upvote')
+            .then(response => response.json())
+            .then(data => {
+                console.log('votes',data)
+                setVotes(data)
+            })
+
         // Fetch the list of posts from the backend
+
         fetch('http://localhost:5000/forum/post')
             .then(response => response.json())
             .then(data => {
@@ -29,6 +42,7 @@ function Forum() {
         // Add the new post to the state
         newPost.replies=[]
         setPosts([...posts, newPost]);
+        setVotes({ ...votes, [newPost.id]: 0 });
     };
 
     const handleEditSubmit = (editPost) => {
@@ -106,6 +120,31 @@ function Forum() {
         });
       };
 
+    const handleUpvote = (postId) => {
+        // fetch(`http://localhost:5000/forum/post/${postId}/upvote`, {
+        //   method: 'POST'
+        // })
+
+        
+        fetch(`http://localhost:5000/forum/post/${postId}/upvote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+          //  body: JSON.stringify({ title, body })
+        })
+        .then(response => {
+          if (response.ok) {
+            // Remove the deleted reply from the corresponding post's 'replies' array
+            
+            setVotes({ ...votes, [postId]: votes[postId] + 1 });
+          } else {
+            throw new Error('Failed to delete reply.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+      };
     return (
         <div>
             <h2>Forum</h2>
@@ -114,6 +153,8 @@ function Forum() {
                     <li key={post.id}>
                         <h3>Title: {post.title}</h3>
                         <p>Body:{post.body}</p>
+                        <button onClick={() => handleUpvote(post.id)}>Upvote</button>
+                        <p>Likes: {votes[post.id]}</p>
                         <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button>
                         <button onClick={() => handleDeletePost(post.id)}>Delete</button>
                         {/* <p>{(post.replies.length)}</p> */}

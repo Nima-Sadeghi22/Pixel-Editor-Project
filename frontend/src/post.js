@@ -71,6 +71,7 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
     //console.log('title', title)
     //console.log('boyd', body)
 
+    
     return (
         <form
             //
