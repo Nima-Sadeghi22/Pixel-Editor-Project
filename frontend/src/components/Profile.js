@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import Card from 'bootstrap'
 import axios from "axios";
 import './Profile.css'
+import Image from "./avatar.png";
 
 function Profile(props) {
 
@@ -41,17 +43,19 @@ function Profile(props) {
   
 
   return (
-    <div>
-      
-        <p className='card' >Welcome {currentName}!</p>
-  
-        <p className='textstyle1' >Profile Name: {currentName}</p>
-        <p className='textstyle2'>Bio: {currentAbout}</p>
-        <p className='textstyle1'> Current Time: {currentTime}</p>
-            
+    
+    <div className='card'>
+      <div>
         
+        <img class="card-img-top" src={Image} alt="Card image cap"></img>
+        <h1>Name: {currentName}</h1>
+        <p>Bio: {currentAbout}</p>
+        
+        </div>   
       
     </div>
+    
+    
   );
 }
 
