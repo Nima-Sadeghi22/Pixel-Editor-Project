@@ -69,7 +69,6 @@ def create_reply(id):
             return jsonify({'reply': reply})
     return jsonify({'error': 'Post not found'}), 404
 
-@cross_origin()
 @app.route('/forum/post/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_delete_post(id):
     global next_id
@@ -82,7 +81,18 @@ def handle_delete_post(id):
         return jsonify({'error': 'Post not found'}), 404
 
 
-
+@app.route('/forum/posts/<int:postId>/replies/<int:replyId>', methods=['DELETE'])
+def delete_reply(postId, replyId):
+  post_index = next((i for i, post in enumerate(posts) if post["id"] == postId), None)
+  if post_index is not None:
+    reply_index = next((i for i, reply in enumerate(posts[post_index]["replies"]) if reply["id"] == replyId), None)
+    if reply_index is not None:
+      del posts[post_index]["replies"][reply_index]
+      return jsonify({'message': 'Reply deleted successfully.'})
+    else:
+      return jsonify({'error': 'Reply not found.'}), 404
+  else:
+    return jsonify({'error': 'Post not found.'}), 404
 
 
 if __name__ == '__main__':

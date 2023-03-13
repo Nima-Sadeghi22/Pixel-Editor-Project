@@ -63,7 +63,7 @@ function Forum() {
             setPosts(updatedPosts);
         }
     };
-    //delete function
+    //delete post function
     const handleDeletePost = (postId) => {
         fetch(`http://localhost:5000/forum/post/${postId}`, {
           method: 'DELETE'
@@ -81,7 +81,30 @@ function Forum() {
           console.error(error);
         });
       }; 
-    
+    //delete reply function
+    const handleDeleteReply = (postId, replyId) => {
+        fetch(`http://localhost:5000/forum/posts/${postId}/replies/${replyId}`, {
+          method: 'DELETE'
+        })
+        .then(response => {
+          if (response.ok) {
+            // Remove the deleted reply from the corresponding post's 'replies' array
+            const postIndex = posts.findIndex(post => post.id === postId);
+            if (postIndex !== -1) {
+              const updatedPost = { ...posts[postIndex] };
+              updatedPost.replies = updatedPost.replies.filter(reply => reply.id !== replyId);
+              const updatedPosts = [...posts];
+              updatedPosts[postIndex] = updatedPost;
+              setPosts(updatedPosts);
+            }
+          } else {
+            throw new Error('Failed to delete reply.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      };
 
     return (
         <div>
@@ -93,11 +116,13 @@ function Forum() {
                         <p>Body:{post.body}</p>
                         <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button>
                         <button onClick={() => handleDeletePost(post.id)}>Delete</button>
-                        <p>{(post.replies.length)}</p>
+                        {/* <p>{(post.replies.length)}</p> */}
                         <ul>
                             
                             {post.replies.map(reply => (
-                                <li key={reply.id}>{reply.body}</li>
+                                <li key={reply.id}>{reply.body}
+                                <button onClick={() => handleDeleteReply(post.id, reply.id)}>Delete</button>
+                            </li>
                             ))}
                         </ul>
                        {/* <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button> */}

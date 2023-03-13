@@ -11,7 +11,7 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
         setBody(bodyProp)
     },[editingPostId])
 
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (editingPostId !== null) {
@@ -93,7 +93,7 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
                     onChange={(e) => setBody(e.target.value)}
                 />
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Post</button>
         </form>
     );
 }
