@@ -14,6 +14,7 @@ Steps on how to use:
     3. run the command "pip install flask"
     4. run the command "pip install python-dotenv"
     5. run the command "pip install Flask-Cors"
+    6. run the command "pip install flask-jwt-extended"
     6. run the command "flask run" to start an instance of the backend API
 
 6. Start a new terminal instance
