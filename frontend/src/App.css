@@ -2,20 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+
+
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,18 +17,12 @@
   color: white;
 }
 
+
+
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /**
  * Modal popup
@@ -53,7 +40,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
 }
-​
+
 .modal{
   width: 90%;
   max-width: 500px;
@@ -62,12 +49,12 @@
   background-color: white;
   box-sizing: border-box;
 }
-​
+
 .modal__bottom {
   text-align: right;
   margin-top: 10px;
 }
-​
+
 .modal__bottom button {
   padding: 6px 10px;
 }
@@ -137,3 +124,4 @@
   width: 100%;
   height: auto;
 }
+
