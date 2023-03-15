@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { BrowserRouter, Route, Routes, Link, Navigate, Redirect } from 'react-router-dom'
 import Login from './components/Login'
 import Profile from './components/Profile'
@@ -36,10 +36,11 @@ function App() {
               <Route exact path = "/profile" element = {<Profile></Profile>}></Route>
               <Route exact path = "/pixeleditor" element = {<PixelEditor x={22} y={22} gridWidth={22} gridHeight={22} pixelWidth={24} defaultColor="#FFFF00"
           selectedColor="#63C5DA"></PixelEditor>}></Route>
+          <Route exact path = "/forum" element = {<Fragment><SearchBar></SearchBar><Forum></Forum></Fragment>}></Route>
           <Route exact path = "/forum" element = {<Forum></Forum>}></Route>
               
             </Routes>
-            <SearchBar></Searchbar>
+            
          
 
 
