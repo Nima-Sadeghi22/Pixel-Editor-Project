@@ -91,7 +91,7 @@ function PixelEditor(props){
                 </button>
             </div>
             <div>
-                <input id="color_input" class="text_input"></input>
+                <input id="color_input" type="color" class="text_input"></input>
                 <button onClick={() => selectedColor=document.getElementById("color_input").value}class="color_selection_buttons">
                 Choose Color (HEX)</button>
             </div>
