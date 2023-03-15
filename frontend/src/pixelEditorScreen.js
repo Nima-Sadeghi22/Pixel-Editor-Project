@@ -61,8 +61,7 @@ function PixelEditor(props){
                         selectedColor.current = document.getElementById("color_input").value;
                         console.log(selectedColor.current)}
                     }
-                    class="color_selection_buttons"
-                >
+                    class="color_selection_buttons">
                     Choose Color (HEX)
                 </button>
             </div>
@@ -73,7 +72,6 @@ function PixelEditor(props){
             </div>
             <button class = "download_button" onClick={() => {
                 var a = document.createElement('a');
-                console.log(document.getElementById('color_input'))
                 a.href = document.getElementById('pixel_canvas').toDataURL('Pixel_Editor_Download/png')
                 a.download = "Pixel_Editor_Download.png";
                 document.body.appendChild(a);
@@ -118,8 +116,13 @@ function PixelEditor(props){
             ctx.moveTo(pixelWidth*i+x, y);
             ctx.lineTo(pixelWidth*i+x, gridHeight*pixelWidth+y);
         }
+        if(signature){
+            ctx.drawImage(signature, 100, 100)
+        }
+
         ctx.stroke();
         ctx.closePath();
+        
     }
 
     function fill(i, j, oldColor){
@@ -139,7 +142,6 @@ function PixelEditor(props){
     }
 
     function onClick(canvas, event) {
-        console.log(selectedColor.current+", "+drawMode.current)
         const rect = canvas.getBoundingClientRect()
         const mousex = event.clientX - rect.left
         const mousey = event.clientY - rect.top
