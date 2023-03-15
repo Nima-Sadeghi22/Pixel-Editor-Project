@@ -4,183 +4,162 @@ import SignaturePad from './SignaturePad';
 
 import './App.css'
 
-    var x;
-    var y;
-    var pixelWidth;
-    var gridWidth;
-    var gridHeight;
-    var defaultColor;
-    var selectedColor;
-    var screenOffset;
-
-    var screenWidth; 
-    var screenHeight;
-
-    var gridColors = [];
-
-    var drawMode = "draw";
-
 function PixelEditor(props){
+    const drawMode = useRef("draw")
+    const selectedColor = useRef(props.selectedColor)
+
     const [openModal, setOpenModal] = useState(false);
     const [signature, setSignature] = useState(null);
 
-    x=props.x;
-    y=props.y;
-    pixelWidth=props.pixelWidth;
-    gridWidth=props.gridWidth;
-    gridHeight=props.gridHeight;
-    defaultColor=props.defaultColor;
-    selectedColor=props.selectedColor;
-    screenOffset = 5; // 5 is the temporary offset before I fix the blur issue
+    var x=props.x;
+    var y=props.y;
+    var pixelWidth=props.pixelWidth;
+    var gridWidth=props.gridWidth;
+    var gridHeight=props.gridHeight;
+    var defaultColor=props.defaultColor;
+    var screenOffset = 5; // 5 is the temporary offset before I fix the blur issue
 
-    screenWidth = (x+gridWidth*pixelWidth + screenOffset);  
-    screenHeight = (y+gridHeight*pixelWidth + screenOffset);
+    var screenWidth = (x+gridWidth*pixelWidth + screenOffset);  
+    var screenHeight = (y+gridHeight*pixelWidth + screenOffset);
 
-    gridColors = [];
-    
-    for (let i = 0; i < gridWidth; i++) {
-        gridColors.push([]);
-        for (let j = 0; j < gridHeight; j++) {
-            gridColors[i].push(defaultColor);
-        }
-    }
-    
-    //---------color demonstration----------
-    //default color = #FFFF00
-    gridColors[2][2] = "#000000";
-    gridColors[7][2] = "#000000";
-    gridColors[1][5] = "#000000";
-    gridColors[1][6] = "#000000";
-    gridColors[2][7] = "#000000";
-    gridColors[3][7] = "#000000";
-    gridColors[4][7] = "#000000";
-    gridColors[5][7] = "#000000";
-    gridColors[6][7] = "#000000";
-    gridColors[7][7] = "#000000";
-    gridColors[8][6] = "#000000";
-    gridColors[8][5] = "#000000";
-    //--------------------------------------
+    const [gridColors, setGridColors] = useState(Array.from({length: gridHeight},()=> Array.from({length: gridWidth}, () => defaultColor)))
 
     const canvasRef = useRef(null)
-    
+
     useEffect(() => {
-        const canvas = canvasRef.current
-        const context = canvas.getContext('2d')
+        var canvas = canvasRef.current
+        var context = canvas.getContext('2d')
         drawGrid(context, true)
         if(canvas){
             canvas.addEventListener('mousedown', function(e) {
                 onClick(canvas, e)
             })
         }
-    })
+    }, [])
+
     return (
         <div>
             <canvas ref={canvasRef} {...props}/>
             <div>
-                <button class = "selection_buttons" onClick={() => drawMode = "draw"}>
+                <button class = "selection_buttons" onClick={() => drawMode.current="draw"}>
                     <img src={require("./images/pencilTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode = "fill"}>
+                <button class = "selection_buttons" onClick={() => drawMode.current="fill"}>
                     <img src={require("./images/bucketTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode = "select"}>
+                <button class = "selection_buttons" onClick={() => drawMode.current="select"}>
                     <img src={require("./images/dropperTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode = "erase"}>
+                <button class = "selection_buttons" onClick={() => drawMode.current="erase"}>
                     <img src={require("./images/eraserTool.png")}/>
                 </button>
             </div>
             <div>
-                <input id="color_input" type="color" class="text_input"></input>
-                <button onClick={() => selectedColor=document.getElementById("color_input").value}class="color_selection_buttons">
-                Choose Color (HEX)</button>
+                <input id="color_input" type="color" class="text_input" />
+                <button
+                    onClick={() => {
+                        selectedColor.current = document.getElementById("color_input").value;
+                        console.log(selectedColor.current)}
+                    }
+                    class="color_selection_buttons"
+                >
+                    Choose Color (HEX)
+                </button>
             </div>
             <p><button onClick={() => setOpenModal(true)}>Create Signature</button></p>
             <h3>Signature</h3>
             <div className="signatureDisplay">
-            {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
+                {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
             </div>
 
             {openModal && (
-        <div className="modalContainer">
-          <div className="modal">
-            <SignaturePad setSignature={setSignature} setOpenModal={setOpenModal} />
-            <div className="modal__bottom">
-              <button onClick={() => setOpenModal(false)}>Cancel</button>
-              </div>
-              </div>
-              </div>
+            <div className="modalContainer">
+                <div className="modal">
+                    <SignaturePad setSignature={setSignature} setOpenModal={setOpenModal} />
+                    <div className="modal__bottom">
+                        <button onClick={() => setOpenModal(false)}>Cancel</button>
+                    </div>
+                </div>
+            </div>
 
            )}
 
         </div>
     );
-}
-
-function drawGrid(ctx, init){
-    if(init){
-        ctx.canvas.width = screenWidth;
-        ctx.canvas.height = screenHeight;
-        ctx.lineWidth = 1.3;
+    
+    function drawGrid(ctx, init){
+        if(init){
+            ctx.canvas.width = screenWidth;
+            ctx.canvas.height = screenHeight;
+            ctx.lineWidth = 1.3;
+        }
+        ctx.strokeStyle = '#000000';
+        ctx.beginPath();
+        for (let i = 0; i < gridWidth; i++) {
+            for (let j = 0; j < gridHeight; j++) {
+                ctx.fillStyle = gridColors[i][j];
+                ctx.fillRect(i * pixelWidth + x, j * pixelWidth + y, pixelWidth, pixelWidth);
+            }
+        }
+        for(let i = 0; i <= gridHeight; i++){
+            ctx.moveTo(x-1, pixelWidth*i+y);                        //-1 and +1 create 
+            ctx.lineTo(gridWidth*pixelWidth+x+1, pixelWidth*i+y);   //square corners 
+        }
+        for(let i = 0; i <= gridWidth; i++ ){
+            ctx.moveTo(pixelWidth*i+x, y);
+            ctx.lineTo(pixelWidth*i+x, gridHeight*pixelWidth+y);
+        }
+        ctx.stroke();
+        ctx.closePath();
     }
-    ctx.strokeStyle = '#000000';
-    ctx.beginPath();
-    for (let i = 0; i < gridWidth; i++) {
-        for (let j = 0; j < gridHeight; j++) {
-            ctx.fillStyle = gridColors[i][j];
-            ctx.fillRect(i * pixelWidth + x, j * pixelWidth + y, pixelWidth, pixelWidth);
+
+    function fill(i, j, oldColor){
+        handleSet(i, j, selectedColor.current);
+        if(i>0&&gridColors[i-1][j]==oldColor) {
+            fill(i-1, j, oldColor);
+        }
+        if(i<gridColors.length-1&&gridColors[i+1][j]==oldColor) {
+            fill(i+1, j, oldColor);
+        }
+        if(j>0&&gridColors[i][j-1]==oldColor) {
+            fill(i, j-1, oldColor);
+        }
+        if(j<gridColors[0].length-1&&gridColors[i][j+1]==oldColor) {
+            fill(i, j+1, oldColor);
         }
     }
-    for(let i = 0; i <= gridHeight; i++){
-        ctx.moveTo(x-1, pixelWidth*i+y);                        //-1 and +1 create 
-        ctx.lineTo(gridWidth*pixelWidth+x+1, pixelWidth*i+y);   //square corners 
-    }
-    for(let i = 0; i <= gridWidth; i++ ){
-        ctx.moveTo(pixelWidth*i+x, y);
-        ctx.lineTo(pixelWidth*i+x, gridHeight*pixelWidth+y);
-    }
-    ctx.stroke();
-    ctx.closePath();
-}
 
-function fill(i, j, oldColor){
-    gridColors[i][j] = selectedColor;
-	if(i>0&&gridColors[i-1][j]==oldColor) {
-		fill(i-1, j, oldColor);
-	}
-	if(i<gridColors.length-1&&gridColors[i+1][j]==oldColor) {
-		fill(i+1, j, oldColor);
-	}
-	if(j>0&&gridColors[i][j-1]==oldColor) {
-		fill(i, j-1, oldColor);
-	}
-	if(j<gridColors[0].length-1&&gridColors[i][j+1]==oldColor) {
-		fill(i, j+1, oldColor);
-	}
-}
-
-function onClick(canvas, event) {
-    const rect = canvas.getBoundingClientRect()
-    const mousex = event.clientX - rect.left
-    const mousey = event.clientY - rect.top
-    let xindex = (mousex-x)/pixelWidth, yindex = (mousey-y)/pixelWidth
-    xindex = Math.floor(xindex)
-    yindex = Math.floor(yindex)
-    if(xindex<0||yindex<0||xindex>gridWidth-1||yindex>gridHeight-1){
-        return
-    }
-    if(drawMode=="draw"){
-        gridColors[xindex][yindex] = selectedColor;
-    }else if(drawMode=="fill"){
-        if(selectedColor!=gridColors[xindex][yindex]){
-            fill(xindex, yindex, gridColors[xindex][yindex])
+    function onClick(canvas, event) {
+        console.log(selectedColor.current+", "+drawMode.current)
+        const rect = canvas.getBoundingClientRect()
+        const mousex = event.clientX - rect.left
+        const mousey = event.clientY - rect.top
+        let xindex = (mousex-x)/pixelWidth, yindex = (mousey-y)/pixelWidth
+        xindex = Math.floor(xindex)
+        yindex = Math.floor(yindex)
+        if(xindex<0||yindex<0||xindex>gridWidth-1||yindex>gridHeight-1){
+            return
         }
-    }else if(drawMode=="select"){
-        selectedColor = gridColors[xindex][yindex];
-    }else if(drawMode=="erase"){
-        gridColors[xindex][yindex] = "#FFFFFF"
+        if(drawMode.current=="draw"){
+            handleSet(xindex, yindex, selectedColor.current);
+        }else if(drawMode.current=="fill"){
+            if(selectedColor.current!=gridColors[xindex][yindex]){
+                fill(xindex, yindex, gridColors[xindex][yindex])
+            }
+        }else if(drawMode.current=="select"){
+            selectedColor.current = gridColors[xindex][yindex];
+        }else if(drawMode.current=="erase"){
+            handleSet(xindex, yindex, "#FFFFFF");
+        }
+        drawGrid(canvas.getContext('2d'), false);
     }
-    drawGrid(canvas.getContext('2d'), false);
+
+    function handleSet(i, j, val){
+        let copy = [...gridColors]
+        copy[i][j] = val
+        setGridColors(copy)
+    }
 }
+
 
 export default PixelEditor

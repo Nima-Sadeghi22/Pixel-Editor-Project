@@ -40,16 +40,6 @@ function App() {
           <Route exact path = "/forum" element = {<Forum></Forum>}></Route>
               
             </Routes>
-            
-         
-
-
-          
-            
-          
-            
-            
-          
           </>
         )}
       </div>
