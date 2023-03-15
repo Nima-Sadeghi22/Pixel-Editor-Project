@@ -105,8 +105,8 @@
   color: white;
 }
 .signature {
-  width: 200px;
-  height: 70px;
+  width: 150px;
+  max-height: 35px;
   margin-top: 20px;
   box-shadow: 0 0 4px 2px gainsboro;
   padding: 10px;
@@ -114,17 +114,23 @@
 }
 
 .signatureDisplay {
-  background-color: #fff;
+  position:fixed;
+  background-color: #bfbaba;
   padding: 10px;
   color: #000;
-  width: 300px;
-  min-height: 75px;
+  width: 150px;
+  height: 50px;
+  top: 800px;
+  left: 875px;
   justify-content: center;
   align-items: center;
 }
 .signatureDisplay img {
-  width: 100%;
-  height: auto;
+  position:fixed;
+  top: 610px;
+  left: 1075px;
+  width: 140px;
+  height: 45px;
 }
 
 .centerimg {

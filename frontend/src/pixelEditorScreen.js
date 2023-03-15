@@ -67,8 +67,8 @@ function PixelEditor(props){
                 </button>
             </div>
             <p><button onClick={() => setOpenModal(true)}>Create Signature</button></p>
-            <h3>Signature</h3>
-            <div className="signatureDisplay">
+            {/* <h3>Signature</h3> */}
+            <div className="signatureDisplay" >
                 {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
             </div>
             <button class = "download_button" onClick={() => {

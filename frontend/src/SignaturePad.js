@@ -10,7 +10,7 @@ function SignaturePad(props){
   const colors = ["black", "green", "red", "purple", "yellow", "blue", "pink", "orange"]
 
   const create = () => {
-    const URL = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    const URL = sigCanvas.current.toDataURL("image/png"); //getTrimmedCanvas()
     setSignature(URL);
     setOpenModal(false);
   };
