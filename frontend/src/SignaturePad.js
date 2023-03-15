@@ -1,6 +1,7 @@
 import React, { useState, useRef,Fragment } from "react";
 import SignatureCanvas from 'react-signature-canvas'
 
+
 function SignaturePad(props){
 
   const { setSignature, setOpenModal } = props;

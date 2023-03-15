@@ -119,9 +119,15 @@
   color: #000;
   width: 300px;
   min-height: 75px;
+  justify-content: center;
+  align-items: center;
 }
 .signatureDisplay img {
   width: 100%;
   height: auto;
 }
 
+.centerimg {
+  justify-content: center;
+  align-items: center;
+}

@@ -1,5 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import "./pixelStyles.css"
+import SignaturePad from './SignaturePad';
+
+import './App.css'
 
     var x;
     var y;
@@ -18,6 +21,8 @@ import "./pixelStyles.css"
     var drawMode = "draw";
 
 function PixelEditor(props){
+    const [openModal, setOpenModal] = useState(false);
+    const [signature, setSignature] = useState(null);
 
     x=props.x;
     y=props.y;
@@ -90,6 +95,24 @@ function PixelEditor(props){
                 <button onClick={() => selectedColor=document.getElementById("color_input").value}class="color_selection_buttons">
                 Choose Color (HEX)</button>
             </div>
+            <p><button onClick={() => setOpenModal(true)}>Create Signature</button></p>
+            <h3>Signature</h3>
+            <div className="signatureDisplay">
+            {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
+            </div>
+
+            {openModal && (
+        <div className="modalContainer">
+          <div className="modal">
+            <SignaturePad setSignature={setSignature} setOpenModal={setOpenModal} />
+            <div className="modal__bottom">
+              <button onClick={() => setOpenModal(false)}>Cancel</button>
+              </div>
+              </div>
+              </div>
+
+           )}
+
         </div>
     );
 }
