@@ -47,7 +47,7 @@ function Profile(props) {
     <div className='card'>
       <div>
         
-        <img class="card-img-top" src={Image} alt="Card image cap"></img>
+        <img className="card-img-top" src={Image} alt="Card image cap"></img>
         <h1>Name: {currentName}</h1>
         <p>Bio: {currentAbout}</p>
         

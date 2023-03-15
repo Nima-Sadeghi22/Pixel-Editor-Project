@@ -10,32 +10,32 @@ import {
 import "./Title.css"
 import "./Navbar.css"
 const Navbar = () => {
-    
+
   return (
     <>
       <Nav className='PLEASE_WORK' >
-        <Bars className='navbar'/>
-  
+        <Bars className='navbar' />
+
         <NavMenu className='PLEASE_WORK'>
-            <p className='animate-charcter'>Pixel Art Creator!</p>
-            <NavLink to='/' activeStyle>
+          <p className='animate-charcter'>Pixel Art Creator!</p>
+          <NavLink to='/'>
             Home
           </NavLink>
-          <NavLink to='/profile' activeStyle>
+          <NavLink to='/profile'>
             Profile
           </NavLink>
-          <NavLink to='/pixeleditor' activeStyle>
+          <NavLink to='/pixeleditor'>
             Pixel Art Creator
           </NavLink>
-          <NavLink to='/forum' activeStyle>
+          <NavLink to='/forum'>
             Forum
           </NavLink>
-        
+
         </NavMenu>
-       
+
       </Nav>
     </>
   );
 };
-  
+
 export default Navbar;

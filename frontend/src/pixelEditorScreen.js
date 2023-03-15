@@ -55,13 +55,13 @@ function PixelEditor(props){
                 </button>
             </div>
             <div>
-                <input id="color_input" type="color" class="text_input" />
+                <input id="color_input" type="color" className="text_input" />
                 <button
                     onClick={() => {
                         selectedColor.current = document.getElementById("color_input").value;
                         console.log(selectedColor.current)}
                     }
-                    class="color_selection_buttons"
+                    className="color_selection_buttons"
                 >
                     Choose Color (HEX)
                 </button>
