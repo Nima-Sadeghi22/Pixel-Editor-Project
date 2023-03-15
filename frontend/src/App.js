@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import SignaturePad from './SignaturePad';
 import PixelEditor from './pixelEditorScreen';
 import Forum from './forum';
+import SearchBar from './Searchbar';
 //import Post from './post';
 //import logo from './logo.svg';
 import './App.css';
@@ -38,6 +39,7 @@ function App() {
           <Route exact path = "/forum" element = {<Forum></Forum>}></Route>
               
             </Routes>
+            <SearchBar></Searchbar>
          
 
 

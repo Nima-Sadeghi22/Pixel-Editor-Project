@@ -1,4 +1,5 @@
 
+
 import json
 import time
 from datetime import datetime
@@ -7,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
                                unset_jwt_cookies, jwt_required, JWTManager
 from flask_cors import CORS, cross_origin
+
 
 
 
@@ -19,6 +21,7 @@ CORS(app)
 
 # In-memory storage for forum posts
 posts=[]
+
 next_id= 1
 votes={}
 @app.route('/forum/post', methods=['GET', 'POST'])
@@ -27,8 +30,6 @@ def handle_post():
 
     if request.method =='GET':
 
-    
-    
         return jsonify(posts)
     elif request.method == 'POST':
         data = request.get_json()
@@ -41,6 +42,7 @@ def handle_post():
         return jsonify(posts)
     
 
+
 @app.route('/forum/posts', methods=['POST'])
 def create_post():
     data = request.get_json()
@@ -48,8 +50,7 @@ def create_post():
         'title': data['title'],
         'body': data['body'],
         'id': len(posts)+1,
-        
-        'replies':[],
+
         'timestamp': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     }
     postid  = len(posts)+1
@@ -178,5 +179,6 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
