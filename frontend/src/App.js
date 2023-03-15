@@ -7,6 +7,10 @@ import useToken from './components/useToken'
 import Navbar from './components/Navbar';
 import SignaturePad from './SignaturePad';
 import PixelEditor from './pixelEditorScreen';
+import Forum from './forum';
+//import Post from './post';
+//import logo from './logo.svg';
+import './App.css';
 import './App.css'
 
 function App() {
@@ -31,6 +35,7 @@ function App() {
               <Route exact path = "/profile" element = {<Profile></Profile>}></Route>
               <Route exact path = "/pixeleditor" element = {<PixelEditor x={22} y={22} gridWidth={22} gridHeight={22} pixelWidth={24} defaultColor="#FFFF00"
           selectedColor="#63C5DA"></PixelEditor>}></Route>
+          <Route exact path = "/forum" element = {<Forum></Forum>}></Route>
               
             </Routes>
          
@@ -47,6 +52,7 @@ function App() {
       </div>
       
     </BrowserRouter>
+
   );
 }
 
