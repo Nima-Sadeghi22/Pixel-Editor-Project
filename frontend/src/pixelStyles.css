@@ -11,8 +11,12 @@
   height:20px;
   width:60px;
 }
+.download_button{
+  height:20px;
+  width:100px;
+}
 
-img {
+#img {
   width: 20px;
   height: 20px;
 }

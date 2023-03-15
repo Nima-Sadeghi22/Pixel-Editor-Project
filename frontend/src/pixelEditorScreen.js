@@ -39,19 +39,19 @@ function PixelEditor(props){
 
     return (
         <div>
-            <canvas ref={canvasRef} {...props}/>
+            <canvas id = "pixel_canvas" ref={canvasRef} {...props}/>
             <div>
                 <button class = "selection_buttons" onClick={() => drawMode.current="draw"}>
-                    <img src={require("./images/pencilTool.png")}/>
+                    <img id = "img" src={require("./images/pencilTool.png")}/>
                 </button>
                 <button class = "selection_buttons" onClick={() => drawMode.current="fill"}>
-                    <img src={require("./images/bucketTool.png")}/>
+                    <img id = "img" src={require("./images/bucketTool.png")}/>
                 </button>
                 <button class = "selection_buttons" onClick={() => drawMode.current="select"}>
-                    <img src={require("./images/dropperTool.png")}/>
+                    <img id = "img" src={require("./images/dropperTool.png")}/>
                 </button>
                 <button class = "selection_buttons" onClick={() => drawMode.current="erase"}>
-                    <img src={require("./images/eraserTool.png")}/>
+                    <img id = "img" src={require("./images/eraserTool.png")}/>
                 </button>
             </div>
             <div>
@@ -71,6 +71,15 @@ function PixelEditor(props){
             <div className="signatureDisplay">
                 {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
             </div>
+            <button class = "download_button" onClick={() => {
+                var a = document.createElement('a');
+                console.log(document.getElementById('color_input'))
+                a.href = document.getElementById('pixel_canvas').toDataURL('Pixel_Editor_Download/png')
+                a.download = "Pixel_Editor_Download.png";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }}>Download</button>
 
             {openModal && (
             <div className="modalContainer">
@@ -159,6 +168,7 @@ function PixelEditor(props){
         copy[i][j] = val
         setGridColors(copy)
     }
+      
 }
 
 
