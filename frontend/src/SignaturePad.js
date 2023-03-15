@@ -3,7 +3,7 @@ import SignatureCanvas from 'react-signature-canvas'
 
 
 function SignaturePad(props){
-  
+
   const { setSignature, setOpenModal } = props;
   const sigCanvas = useRef();
   const [penColor, setPenColor] = useState("black");
