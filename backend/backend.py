@@ -22,18 +22,21 @@ CORS(app)
 # In-memory storage for forum posts
 posts=[]
 next_id= 1
+votes={}
 @app.route('/forum/post', methods=['GET', 'POST'])
 def handle_post():
     global next_id
 
     if request.method =='GET':
+
+    
+    
         return jsonify(posts)
     elif request.method == 'POST':
         data = request.get_json()
         new_post= {
             'title': data['title'],
             'body': data['body'],
-            #'replies':daa
             'timestamp':datetime.now().strftime("%m/%d/%Y %H:%M:%S")      }
         posts.append(new_post)
         next_id += 1
@@ -47,10 +50,19 @@ def create_post():
         'title': data['title'],
         'body': data['body'],
         'id': len(posts)+1,
+        
         'replies':[],
         'timestamp': datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     }
+    postid  = len(posts)+1
+    
     posts.append(new_post)
+
+    print('id')
+    print(postid)
+    votes[postid]=0
+    print('votes ow')
+    print(votes)
     return jsonify({'post': new_post}), 201
 
 
@@ -104,6 +116,22 @@ def delete_reply(postId, replyId):
   else:
     return jsonify({'error': 'Post not found.'}), 404
 
+
+@app.route('/forum/posts/upvote', methods=['GET'])
+def upvote_post():
+    return jsonify(votes)
+
+
+@app.route('/forum/post/<int:id>/upvote', methods=['POST'])
+def upvotes(id):
+    if id in votes:
+        votes[id] += 1
+        return jsonify({'votes': votes[id]})
+    else:
+        return jsonify({'error': 'Post not found.'}), 404
+
+
+    return '', 204
 
 @app.after_request
 def refresh_expiring_jwts(response):
