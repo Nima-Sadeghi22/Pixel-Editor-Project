@@ -58,7 +58,9 @@ function PixelEditor(props) {
             ctx.lineTo(pixelWidth * i + x, gridHeight * pixelWidth + y);
         }
         if (signature) {
-           ctx.drawImage(signature, 100, 100)
+            const imgX = ctx.canvas.width - signature.width -5;
+            const imgY = ctx.canvas.height - signature.height - 5;
+            ctx.drawImage(signature, imgX, imgY)
         }
 
         ctx.stroke();
@@ -110,6 +112,7 @@ function PixelEditor(props) {
         } else if (drawMode === "erase") {
             handleSet(xindex, yindex, "#FFFFFF");
         }
+        // Does this do anything?
         drawGrid(canvas.getContext('2d'), false);
     }
 
