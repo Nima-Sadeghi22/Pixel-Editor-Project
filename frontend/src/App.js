@@ -1,12 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { BrowserRouter, Route, Routes, Link, Navigate, Redirect } from 'react-router-dom'
+import React, { Fragment } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Header from './components/Header'
 import useToken from './components/useToken'
 import Navbar from './components/Navbar';
-import SignaturePad from './SignaturePad';
 import PixelEditor from './pixelEditorScreen';
 import Forum from './forum';
 import SearchBar from './Searchbar';
@@ -17,8 +16,6 @@ import './App.css'
 
 function App() {
   const { token, removeToken, setToken } = useToken();
-  const [openModal, setOpenModal] = useState(false);
-  const [signature, setSignature] = useState(null);
 
   return (
     <BrowserRouter>
@@ -44,7 +41,7 @@ function App() {
                     gridheight={22}
                     pixelwidth={24}
                     defaultcolor="#FFFF00"
-                    selectedcolor="#63C5DA" />
+                  />
                   }>
                 </Route>
                 <Route exact path="/forum" element={<Fragment><SearchBar></SearchBar><Forum></Forum></Fragment>}></Route>

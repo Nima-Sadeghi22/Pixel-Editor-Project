@@ -7,5 +7,5 @@
     justify-content: right;
     font-size: calc(10px + 2vmin);
     color: white;
-    align-items: end;
+    align-items: flex-end;
   }
