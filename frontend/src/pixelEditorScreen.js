@@ -58,9 +58,9 @@ function PixelEditor(props) {
             ctx.lineTo(pixelWidth * i + x, gridHeight * pixelWidth + y);
         }
         if (signature) {
-            const imgX = ctx.canvas.width - signature.width -5;
-            const imgY = ctx.canvas.height - signature.height - 5;
-            ctx.drawImage(signature, imgX, imgY)
+            const imgX = ctx.canvas.width - signature.width + 305;
+            const imgY = ctx.canvas.height - signature.height + 135;
+            ctx.drawImage(signature,imgX,imgY,150, 50); 
         }
 
         ctx.stroke();
@@ -165,9 +165,9 @@ function PixelEditor(props) {
             </div>
             <p><button onClick={() => setOpenModal(true)}>Create Signature</button></p>
             {/* <h3>Signature</h3> */}
-            <div className="signatureDisplay" >
+            {/* <div className="signatureDisplay" >
                 {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
-            </div>
+            </div> */}
             <button className="download_button" onClick={() => {
                 var a = document.createElement('a');
                 a.href = document
