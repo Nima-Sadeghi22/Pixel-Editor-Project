@@ -30,7 +30,7 @@ function PixelEditor(props) {
     const [drawMode, setDrawMode] = useState("draw")
     const canvasRef = useRef(null)
     const colorRef = useRef(null)
-    console.log(selectedColor)
+    // console.log(selectedColor)
 
     /**
      * Setup actions
@@ -58,12 +58,11 @@ function PixelEditor(props) {
             ctx.lineTo(pixelWidth * i + x, gridHeight * pixelWidth + y);
         }
         if (signature) {
-            ctx.drawImage(signature, 100, 100)
+           ctx.drawImage(signature, 100, 100)
         }
 
         ctx.stroke();
         ctx.closePath();
-
     }
 
     const fill = (i, j, oldColor) => {
@@ -180,7 +179,15 @@ function PixelEditor(props) {
             {openModal && (
                 <div className="modalContainer">
                     <div className="modal">
-                        <SignaturePad setSignature={setSignature} setOpenModal={setOpenModal} />
+                        <SignaturePad
+                            setSignature={base64encodedPNG => {
+                                // console.log(base64encodedPNG)
+                                const img = document.createElement('img');
+                                img.src = base64encodedPNG;
+                                img.onload = () => setSignature(img)
+                            }}
+                            setOpenModal={setOpenModal}
+                        />
                         <div className="modal__bottom">
                             <button onClick={() => setOpenModal(false)}>Cancel</button>
                         </div>
