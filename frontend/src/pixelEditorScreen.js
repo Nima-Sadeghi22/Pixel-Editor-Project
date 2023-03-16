@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import "./pixelStyles.css"
 import SignaturePad from './SignaturePad';
+import logo from './logo.svg'
 
 import './App.css'
 
@@ -13,10 +14,10 @@ function PixelEditor(props){
 
     var x=props.x;
     var y=props.y;
-    var pixelWidth=props.pixelWidth;
-    var gridWidth=props.gridWidth;
-    var gridHeight=props.gridHeight;
-    var defaultColor=props.defaultColor;
+    var pixelWidth=props.pixelwidth;
+    var gridWidth=props.gridwidth;
+    var gridHeight=props.gridheight;
+    var defaultColor=props.defaultcolor;
     var screenOffset = 5; // 5 is the temporary offset before I fix the blur issue
 
     var screenWidth = (x+gridWidth*pixelWidth + screenOffset);  
@@ -33,24 +34,24 @@ function PixelEditor(props){
         if(canvas){
             canvas.addEventListener('mousedown', function(e) {
                 onClick(canvas, e)
-            })
+            });
         }
     }, [])
 
     return (
         <div>
-            <canvas id = "pixel_canvas" ref={canvasRef} {...props}/>
+            <canvas id="pixel_canvas" ref={canvasRef} {...props}/>
             <div>
-                <button class = "selection_buttons" onClick={() => drawMode.current="draw"}>
+                <button className="selection_buttons" onClick={() => drawMode.current="draw"}>
                     <img id = "img" src={require("./images/pencilTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode.current="fill"}>
+                <button className="selection_buttons" onClick={() => drawMode.current="fill"}>
                     <img id = "img" src={require("./images/bucketTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode.current="select"}>
+                <button className="selection_buttons" onClick={() => drawMode.current="select"}>
                     <img id = "img" src={require("./images/dropperTool.png")}/>
                 </button>
-                <button class = "selection_buttons" onClick={() => drawMode.current="erase"}>
+                <button className="selection_buttons" onClick={() => drawMode.current="erase"}>
                     <img id = "img" src={require("./images/eraserTool.png")}/>
                 </button>
             </div>
@@ -71,9 +72,11 @@ function PixelEditor(props){
             <div className="signatureDisplay" >
                 {signature ? <img src={signature} width="300" alt="Signature" /> : <p>No Signature Set</p>}
             </div>
-            <button class = "download_button" onClick={() => {
+            <button className="download_button" onClick={() => {
                 var a = document.createElement('a');
-                a.href = document.getElementById('pixel_canvas').toDataURL('Pixel_Editor_Download/png')
+                a.href = document
+                    .getElementById('pixel_canvas')
+                    .toDataURL('Pixel_Editor_Download/png');
                 a.download = "Pixel_Editor_Download.png";
                 document.body.appendChild(a);
                 a.click();
