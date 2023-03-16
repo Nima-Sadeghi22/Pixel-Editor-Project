@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Post from './post'
 import Reply from './reply'
-import './buttonLike.css'
+import './forum.css'
+
 function Forum() {
     const [selectedTitle, setSelectedTitle] = useState('')
     const [selectedBody, setSelectedBody] = useState('')
@@ -171,7 +172,9 @@ function Forum() {
                     </li>
                 ))}
             </ul>
+            <div className='newpost'>
             <Post onNewPost={handleNewPost} editingPostId={editingPostId} titleProp={selectedTitle} bodyProp={selectedBody} handleEditSubmit={handleEditSubmit} />
+            </div>
         </div>
     );
 }

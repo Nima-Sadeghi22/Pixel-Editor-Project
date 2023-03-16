@@ -1,0 +1,15 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+.newpost {
+    margin: 0;
+    margin-top: 20px;
+    margin-left: -30px;
+    padding: 0;
+}
+li {
+
+    padding: 10px;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Reply from './reply' 
+import './post.css'
 //import Forum from './forum'
 
 function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bodyProp }) {
@@ -78,7 +79,7 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
             onSubmit={handleSubmit}
         >
             <div>
-                <label htmlFor="title">Title:</label>
+                <label htmlFor="title">Title: </label>
                 <input type="text" id="title" value={
 
                     title
@@ -88,13 +89,15 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
                 />
             </div>
             <div>
-                <label htmlFor="body">Body:</label>
+                <label htmlFor="body">Body: </label>
                 <textarea id="body" value={body}
                     //
                     onChange={(e) => setBody(e.target.value)}
                 />
             </div>
+            <div className='Submitbutton'>
             <button type="submit">Post</button>
+            </div>
         </form>
     );
 }
