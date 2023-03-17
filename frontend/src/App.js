@@ -40,11 +40,11 @@ function App() {
                     gridwidth={22}
                     gridheight={22}
                     pixelwidth={24}
-                    defaultcolor="#FFFFFF"
+                    defaultcolor="#FFFF00"
                   />
                   }>
                 </Route>
-                <Route exact path="/forum" element={<Fragment><Forum></Forum></Fragment>}></Route>
+                <Route exact path="/forum" element={<Fragment><SearchBar></SearchBar><Forum></Forum></Fragment>}></Route>
                 <Route exact path="/forum" element={<Forum></Forum>}></Route>
 
               </Routes>

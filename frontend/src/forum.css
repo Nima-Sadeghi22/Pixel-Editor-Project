@@ -10,7 +10,6 @@ ul {
     padding: 0;
 }
 .post-container {
-    position: relative;
     border: 1px solid #000000;
     border-radius: 60px;
     align-self: center;
@@ -18,37 +17,5 @@ ul {
     margin: 0 auto;
     width: 40%;
     margin-bottom: 10px; /* Add margin to separate posts */
-    background-color: rgb(148, 148, 148);
-    color:rgb(255, 255, 255)
-  }
-
-  .reply-container {
-    color: black;
-    border: 1px solid #000000;
-    border-radius: 60px;
-    align-self: center;
-    padding: 10px; 
-    margin: 160px;
-    width: 40%;
-    margin-top: 20px;
-    margin-bottom: 50px; /* Add margin to separate posts */
-    background-color: rgb(255, 255, 255);
-    margin-left: 168px;
-  }
-  .delete-button {
-    margin-left: 20px;
-  }
-
-  .likes-count {
-    position: absolute;
-    top: 45px;
-    right: 30px;
-    background-image: url('./images/thumbs-up-regular.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    padding-left: 30px;
-  }
-  .post-container button {
-    border-radius: 5px;
-    border-width: 1px;
+    background-color: rgb(199, 199, 199);
   }

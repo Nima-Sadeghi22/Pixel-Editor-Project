@@ -23,7 +23,7 @@ function PixelEditor(props) {
     /**
      * Setup State
      */
-    const [selectedColor, setSelectedColor] = useState('#000000')
+    const [selectedColor, setSelectedColor] = useState('#FF0000')
     const [openModal, setOpenModal] = useState(false);
     const [signature, setSignature] = useState(null);
     const [gridColors, setGridColors] = useState(Array.from({ length: gridHeight }, () => Array.from({ length: gridWidth }, () => defaultColor)))
