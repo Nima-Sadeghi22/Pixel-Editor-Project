@@ -175,18 +175,21 @@ function Forum() {
       <SearchBar posts={posts} />
      
         <div>
-            <h2>Forum</h2>
+            <h1>Forum</h1>
             <ul>
                 {posts.map(post => (
                     <li key={post.id} className='post-container'>
-                        <h3>Title: {post.title}</h3>
+                        <h2>{post.title}</h2>
                         <p>{post.body}</p>
-                        <button onClick={() => handleUpvote(post.id)}>Upvote</button>
-                        
-                        <button onClick={() => handleDownvote(post.id)}>Downvote</button>
-                        <p>Likes: {votes[post.id]}</p>
-                        <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button>
-                        <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+                        <button onClick={() => handleUpvote(post.id)} style={{ position: "absolute", top: 20, right: 30 }}>
+                          <img id="img" alt="Happy" src={require("./images/upvote.png")} /></button>                     
+                        <button onClick={() => handleDownvote(post.id)} style={{ position: "absolute", top: 100, right: 30 }}>
+                          <img id="img" alt="Sad" src={require("./images/downvote.png")} /></button>
+                        <p className="likes-count">{votes[post.id]} </p>
+                        <button onClick={() => handleEditPost(post.id, post.title, post.body)} style={{ position: "absolute", top: 20, left: 30 }}>
+                          <img id="img" alt="Edit" src={require("./images/pen-to-square-regular.png")} /></button>
+                        <button onClick={() => handleDeletePost(post.id)} style={{ position: "absolute", top: 100, left: 30 }}>
+                          <img id="img" alt="Delete" src={require("./images/trash-can-regular.png")} /></button>
                         {/* <p>{(post.replies.length)}</p> */}
                         <ul>
                             

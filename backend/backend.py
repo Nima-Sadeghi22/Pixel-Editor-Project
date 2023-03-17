@@ -91,7 +91,7 @@ def create_reply(id):
             return jsonify({'reply': reply})
     return jsonify({'error': 'Post not found'}), 404
 
-@app.route('/forum/post/<int:id>', methods=['GET', 'PUT', 'DELETE', 'POST'])
+@app.route('/forum/post/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_delete_post(id):
     global next_id
 

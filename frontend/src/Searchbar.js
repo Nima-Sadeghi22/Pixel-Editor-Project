@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Searchbar.css';
+import Forum from './forum';
+import votes from './forum'
 
 function SearchBar({posts}) {
  
@@ -46,7 +48,7 @@ function SearchBar({posts}) {
     <div className='search-bar'>
       <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="search-input"/>
       <h2 className='searchtitle'>Search Results: </h2>
-      <div>
+      <div className='sort-tab'>
         Sort by: 
         <select value={sortOption} onChange={e => setSortOption(e.target.value)}>
           <option value="time">Time</option>
@@ -55,9 +57,10 @@ function SearchBar({posts}) {
       </div>
       <ul>
         {filteredPosts.map(post => (
-          <li key={post.id}>
-            <h3>Title: {post.title}</h3>
-            <p>Body:{post.body}</p>
+          <li key={post.id} className='post-block'>
+            <h2>{post.title}</h2>
+            <p>{post.body}</p>
+            <p className="likes-count">{votes[post.id]} </p>
             </li>
         ))}
       </ul>
