@@ -58,8 +58,8 @@ function PixelEditor(props) {
             ctx.lineTo(pixelWidth * i + x, gridHeight * pixelWidth + y);
         }
         if (signature) {
-            const imgX = ctx.canvas.width - signature.width + 305;
-            const imgY = ctx.canvas.height - signature.height + 135;
+            const imgX = ctx.canvas.width - signature.width + 525;
+            const imgY = ctx.canvas.height - signature.height + 225;
             ctx.drawImage(signature,imgX,imgY,150, 50); 
         }
 
