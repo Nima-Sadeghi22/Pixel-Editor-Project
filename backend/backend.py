@@ -133,6 +133,25 @@ def upvotes(id):
 
     return '', 204
 
+@app.route('/forum/posts/downvote', methods=['GET'])
+def downvote_post():
+    return jsonify(votes)
+
+
+@app.route('/forum/post/<int:id>/downvote', methods=['POST'])
+def dislike_post(id):
+    if id in votes:
+        votes[id] = votes[id]- 1
+        return jsonify({'votes': votes[id]})
+    else:
+        return jsonify({'error': 'Post not found.'}), 404
+
+
+    return '', 204
+
+
+
+
 @app.after_request
 def refresh_expiring_jwts(response):
     try:

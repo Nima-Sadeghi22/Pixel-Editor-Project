@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Post from './post'
 import Reply from './reply'
 import './forum.css'
+import SearchBar from './Searchbar';
 
 function Forum() {
     const [selectedTitle, setSelectedTitle] = useState('')
@@ -144,26 +145,57 @@ function Forum() {
         .catch(error => {
           console.error(error);
         });
+      }
+        const handleDownvote = (postId) => {
+          // fetch(`http://localhost:5000/forum/post/${postId}/upvote`, {
+          //   method: 'POST'
+          // })
+          fetch(`http://localhost:5000/forum/post/${postId}/downvote`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+            //  body: JSON.stringify({ title, body })
+          })
+          .then(response => {
+            if (response.ok) {
+              // Remove the deleted reply from the corresponding post's 'replies' array
+              
+              setVotes({ ...votes, [postId]: votes[postId] - 1 });
+            } else {
+              throw new Error('Failed');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
 
+        
       };
     return (
+      <>
+      <SearchBar posts={posts} />
+     
         <div>
-            <h2>Forum</h2>
+            <h1>Forum</h1>
             <ul>
                 {posts.map(post => (
                     <li key={post.id} className='post-container'>
-                        <h3>Title: {post.title}</h3>
-                        <p>Body:{post.body}</p>
-                        <button onClick={() => handleUpvote(post.id)}>Upvote</button>
-                        <p>Likes: {votes[post.id]}</p>
-                        <button onClick={() => handleEditPost(post.id, post.title, post.body)}>Edit</button>
-                        <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+                        <h2>{post.title}</h2>
+                        <p>{post.body}</p>
+                        <button onClick={() => handleUpvote(post.id)} style={{ position: "absolute", top: 20, right: 30 }}>
+                          <img id="img" alt="Happy" src={require("./images/upvote.png")} /></button>                     
+                        <button onClick={() => handleDownvote(post.id)} style={{ position: "absolute", top: 100, right: 30 }}>
+                          <img id="img" alt="Sad" src={require("./images/downvote.png")} /></button>
+                        <p className="likes-count">{votes[post.id]} </p>
+                        <button onClick={() => handleEditPost(post.id, post.title, post.body)} style={{ position: "absolute", top: 20, left: 30 }}>
+                          <img id="img" alt="Edit" src={require("./images/pen-to-square-regular.png")} /></button>
+                        <button onClick={() => handleDeletePost(post.id)} style={{ position: "absolute", top: 100, left: 30 }}>
+                          <img id="img" alt="Delete" src={require("./images/trash-can-regular.png")} /></button>
                         {/* <p>{(post.replies.length)}</p> */}
                         <ul>
                             
                             {post.replies.map(reply => (
-                                <li key={reply.id}>{reply.body}
-                                <button onClick={() => handleDeleteReply(post.id, reply.id)}>Delete</button>
+                                <li key={reply.id} className= 'reply-container'>{reply.body}
+                                <button onClick={() => handleDeleteReply(post.id, reply.id)}className="delete-button" >Delete</button>
                             </li>
                             ))}
                         </ul>
@@ -176,6 +208,7 @@ function Forum() {
             <Post onNewPost={handleNewPost} editingPostId={editingPostId} titleProp={selectedTitle} bodyProp={selectedBody} handleEditSubmit={handleEditSubmit} />
             </div>
         </div>
+        </>
     );
 }
 
