@@ -1,0 +1,27 @@
+.selection_buttons{
+  height:25px;
+  width:70px;
+}
+.color_selection_buttons{
+  height:25px;
+  width:150px;
+}
+
+.selection_buttons.selected {
+  background-color: #61dafb;
+}
+
+.text_input{
+  margin-top:10px;
+  height:20px;
+  width:60px;
+}
+.download_button{
+  height:20px;
+  width:100px;
+}
+
+#img {
+  width: 20px;
+  height: 20px;
+}

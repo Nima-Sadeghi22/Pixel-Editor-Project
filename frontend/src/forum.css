@@ -1,0 +1,21 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+.newpost {
+    margin: 0;
+    margin-top: 20px;
+    margin-left: -30px;
+    padding: 0;
+}
+.post-container {
+    border: 1px solid #000000;
+    border-radius: 60px;
+    align-self: center;
+    padding: 10px; 
+    margin: 0 auto;
+    width: 40%;
+    margin-bottom: 10px; /* Add margin to separate posts */
+    background-color: rgb(199, 199, 199);
+  }
