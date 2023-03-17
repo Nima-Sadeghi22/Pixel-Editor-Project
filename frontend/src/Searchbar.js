@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './Searchbar.css';
 
-function SearchBar() {
-  const [posts, setPosts] = useState([]);
+function SearchBar({posts}) {
+ 
+  const [filteredPosts, setFilteredPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('time');
 
-  useEffect(() => {
-    async function fetchPosts() {
-      const response = await fetch('http://localhost:5000/forum/post');
-      const data = await response.json();
-      setPosts(data);
-    }
-    fetchPosts();
-  }, [posts]);
+  // useEffect(() => {
+  //   async function fetchPosts() {
+  //     const response = await fetch('http://localhost:5000/forum/post');
+  //     const data = await response.json();
+  //     setPosts(data);
+  //   }
+  //   fetchPosts();
+  // }, []);
 
-  const filteredPosts = posts.filter(post => {
-    return post.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  useEffect(()=>{
+
+    if(searchTerm){
+      setFilteredPosts(
+        posts?.filter(post => {
+          return post.title.toLowerCase().includes(searchTerm.toLowerCase());
+        })
+      )
+    }
+
+  }, [searchTerm])
 
   if (searchTerm === '') {
     return (

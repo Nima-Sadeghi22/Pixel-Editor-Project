@@ -17,5 +17,20 @@ ul {
     margin: 0 auto;
     width: 40%;
     margin-bottom: 10px; /* Add margin to separate posts */
-    background-color: rgb(199, 199, 199);
+    background-color: rgb(148, 148, 148);
+  }
+
+  .reply-container {
+    border: 1px solid #000000;
+    border-radius: 60px;
+    align-self: center;
+    padding: 10px; 
+    margin: 160px;
+    width: 40%;
+    margin-top: 20px;
+    margin-bottom: 50px; /* Add margin to separate posts */
+    background-color: rgb(255, 255, 255);
+  }
+  .delete-button {
+    margin-left: 20px;
   }

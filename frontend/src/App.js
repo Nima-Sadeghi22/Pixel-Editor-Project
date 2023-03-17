@@ -44,7 +44,7 @@ function App() {
                   />
                   }>
                 </Route>
-                <Route exact path="/forum" element={<Fragment><SearchBar></SearchBar><Forum></Forum></Fragment>}></Route>
+                <Route exact path="/forum" element={<Fragment><Forum></Forum></Fragment>}></Route>
                 <Route exact path="/forum" element={<Forum></Forum>}></Route>
 
               </Routes>
