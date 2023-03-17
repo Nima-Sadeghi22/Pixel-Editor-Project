@@ -40,7 +40,7 @@ function App() {
                     gridwidth={22}
                     gridheight={22}
                     pixelwidth={24}
-                    defaultcolor="#FFFF00"
+                    defaultcolor="#FFFFFF"
                   />
                   }>
                 </Route>
