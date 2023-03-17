@@ -36,6 +36,7 @@ function SearchBar() {
   return (
     <div className='search-bar'>
       <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="search-input"/>
+      <h2 className='searchtitle'>Search Results: </h2>
       <div>
         Sort by: 
         <select value={sortOption} onChange={e => setSortOption(e.target.value)}>

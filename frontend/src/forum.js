@@ -151,7 +151,7 @@ function Forum() {
             <h2>Forum</h2>
             <ul>
                 {posts.map(post => (
-                    <li key={post.id}>
+                    <li key={post.id} className='post-container'>
                         <h3>Title: {post.title}</h3>
                         <p>Body:{post.body}</p>
                         <button onClick={() => handleUpvote(post.id)}>Upvote</button>
