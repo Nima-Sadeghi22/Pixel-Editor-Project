@@ -89,7 +89,7 @@ function SubmitPost({ onNewPost, handleEditSubmit, editingPostId, titleProp, bod
                 />
             </div>
             <div>
-                <label htmlFor="body" className='bo'>Body: </label>
+                <label htmlFor="body">Body: </label>
                 <textarea id="body" value={body}
                     //
                     onChange={(e) => setBody(e.target.value)}
